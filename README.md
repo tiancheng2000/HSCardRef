@@ -7,19 +7,19 @@ Installers and source files can be obtained from [here][release].
 
 What's it?
 ----------
-* Originally, it's an demo project for a Android/JRE(Windows,MacOS) cross-platform framework [ThinkAlike](https://github.com/tiancheng2000/ThinkAlike).  
+* Originally, it's a demo project for a Android/JRE(Windows,MacOS) cross-platform framework [ThinkAlike](https://github.com/tiancheng2000/ThinkAlike).  
 * From then on, it may grow up into an enjoyable HearthStone Card Reference facility.  
 
 What can it bring to us?
 -----------------------------------------------
+* For HearthStone game players, it provides the following useful features/functionalities: 
+  1.Card Selector: Show game cards according to the selected Class (e.g.Druid, Hunter).
+  2.Card Details: Show details of the selected card (in Card Selector) in central area.
+  3.Card Selector Filters: Filters can be applied in category of Mana/Atk/Hp and **Abilities** (e.g.taunt, secret).
+  4.Card Deck Builder (TODO)
+  5.Card Composition Hints based on Might Calculation (Advanced)
+  6.Automatic competition between Card Decks (Advanced)
 * For programmers, it demostrates the further application of the ThinkAlike framework, exploring the easiness/uneasiness of doing cross-platform development.
-* For HearthStone game players, it provides the following useful features: 
-  * Card Selector: Show game cards according to the selected Class (e.g.Druid, Hunter).
-  * Card Details: Show details of the selected card (in Card Selector) in central area.
-  * Card Selector Filters: Filters can be applied in category of Mana/Atk/Hp and **Abilities** (e.g.taunt, secret).
-  * Card Deck Builder (TODO)
-  * Card Composition Hints based on Might Calculation (Advanced)
-  * Automatic competition between Card Decks (Advanced)
 
 License 
 -------
