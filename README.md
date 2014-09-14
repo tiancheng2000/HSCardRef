@@ -13,12 +13,12 @@ What's it?
 What can it bring to us?
 -----------------------------------------------
 * For HearthStone game players, it provides the following useful features/functionalities: 
-  1.Card Selector: Show game cards according to the selected Class (e.g.Druid, Hunter).
-  2.Card Details: Show details of the selected card (in Card Selector) in central area.
-  3.Card Selector Filters: Filters can be applied in category of Mana/Atk/Hp and **Abilities** (e.g.taunt, secret).
-  4.Card Deck Builder (TODO)
-  5.Card Composition Hints based on Might Calculation (Advanced)
-  6.Automatic competition between Card Decks (Advanced)
+  1. Card Selector: Show game cards according to the selected Class (e.g.Druid, Hunter).
+  2. Card Details: Show details of the selected card (in Card Selector) in central area.
+  3. Card Selector Filters: Filters can be applied in category of Mana/Atk/Hp and **Abilities** (e.g.taunt, secret).
+  4. Card Deck Builder (TODO)
+  5. Card Composition Hints based on Might Calculation (Advanced)
+  6. Automatic competition between Card Decks (Advanced)
 * For programmers, it demostrates the further application of the ThinkAlike framework, exploring the easiness/uneasiness of doing cross-platform development.
 
 License 
