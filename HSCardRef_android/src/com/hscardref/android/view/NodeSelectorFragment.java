@@ -29,12 +29,15 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
-import com.hscardref.android.adapter.NodeAdapter;
-import com.hscardref.generic.viewmodel.NodeSelectorViewModel;
 import com.hscardref.R;
+import com.hscardref.android.adapter.NodeAdapter;
+import com.hscardref.generic.common.Constant;
+import com.hscardref.generic.domain.CardCompositeFilter;
+import com.hscardref.generic.domain.CardFilterCollection;
+import com.hscardref.generic.domain.CardNumericFilter;
+import com.hscardref.generic.viewmodel.NodeSelectorViewModel;
 import com.thinkalike.android.control.ComboBox;
 import com.thinkalike.android.control.ComboBox.ComboBoxListener;
-import com.hscardref.generic.common.Constant;
 import com.thinkalike.generic.common.LogTag;
 import com.thinkalike.generic.common.Util;
 import com.thinkalike.generic.domain.NodeType;
@@ -88,7 +91,14 @@ public class NodeSelectorFragment extends Fragment implements OnItemClickListene
 	private PropertyChangeListener _listenToVM = null;  //listen to relative ViewModel. SHOULD be a instance variable. 
 														  //Registration side (ViewModel) will only keep their WeakReference.
 
+	//IMPROVE: check necessity (for Func#3)
+	private FragmentCallbacks _listenerFromActivity;
+	private boolean isRefresh = true;
+
 	//-- Properties --------------------------	
+	public boolean isRefresh() {return isRefresh;}
+	public void setRefresh(boolean isRefresh) {this.isRefresh = isRefresh;}
+	
 	//-- Constructors --------------------------
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -172,8 +182,12 @@ public class NodeSelectorFragment extends Fragment implements OnItemClickListene
 
 	@Override
 	public void onResume() {
-		_viewModel.onNodeTypeChanged(_currentNodeType);
-		_viewModel.onRefreshNodeList();
+		if (isRefresh) {
+			_viewModel.onNodeTypeChanged(_currentNodeType);
+			_viewModel.onRefreshNodeList();
+		}
+		isRefresh = true; //TODO: confirm "=true"? rename the variable to make the meaning clear.
+		
 		super.onResume();
 	}
 
@@ -183,12 +197,12 @@ public class NodeSelectorFragment extends Fragment implements OnItemClickListene
 		super.onAttach(activity);
 
 		//ViewModel may check type of parent Activity here. 
-//		if (!(activity instanceof FragmentCallbacks)) {
-//			throw new IllegalStateException(
-//					"Activity must implement fragment's callbacks.");
-//		}
+		if (!(activity instanceof FragmentCallbacks)) {
+			throw new IllegalStateException(
+					"Activity must implement fragment's callbacks.");
+		}
 
-		//_listenerFromActivity = (FragmentCallbacks) activity;
+		_listenerFromActivity = (FragmentCallbacks) activity;
 	}
 
 	@Override
@@ -196,8 +210,8 @@ public class NodeSelectorFragment extends Fragment implements OnItemClickListene
 		Util.trace(LogTag.LifeCycleManagement, String.format("%s: onDetach", getClass().getSimpleName()));
 		super.onDetach();
 
-		//// Reset the active callbacks interface to null.
-		//_listenerFromActivity = null;
+		// Reset the active callbacks interface to null.
+		_listenerFromActivity = null;
 	}
 	
 	@Override
@@ -243,6 +257,61 @@ public class NodeSelectorFragment extends Fragment implements OnItemClickListene
 		Util.trace(LogTag.ViewModel, String.format("[ICommand]::View Node selected(=%s)", uiNode));
 		if(_viewModel!=null)
 			_viewModel.onNodeSelected(uiNode);
+	}
+
+	public void applyCardFilter(int id, int filterType, CardCompositeFilter cardCompositeFilter){
+
+		//TODO: #confirm# why not combine the compositeFilter and numericFilter within the filterCollection?
+		CardFilterCollection cardFilter = _viewModel.getCardFilter();
+		CardNumericFilter cardNumFilter = cardFilter.get_cardNumericFilter();
+    	
+    	if (id >= -1) {
+    		cardNumFilter.setType(filterType);
+
+    		switch (id) {
+    		case R.id.btn_nodefilter_all:
+    			cardNumFilter.setNum(-1);
+    			break;
+    		case R.id.btn_nodefilter_0:
+    			cardNumFilter.setNum(0);
+    			break;
+    		case R.id.btn_nodefilter_1:
+    			cardNumFilter.setNum(1);
+    			break;
+    		case R.id.btn_nodefilter_2:
+    			cardNumFilter.setNum(2);
+    			break;
+    		case R.id.btn_nodefilter_3:
+    			cardNumFilter.setNum(3);
+    			break;
+    		case R.id.btn_nodefilter_4:
+    			cardNumFilter.setNum(4);
+    			break;
+    		case R.id.btn_nodefilter_5:
+    			cardNumFilter.setNum(5);
+    			break;
+    		case R.id.btn_nodefilter_6:
+    			cardNumFilter.setNum(6);
+    			break;
+    		case R.id.btn_nodefilter_7plus:
+    			cardNumFilter.setNum(7);
+    			break;
+    		default:
+    			break;
+    		}
+    	}
+    	
+    	cardFilter.set_cardNumericFilter(cardNumFilter);
+    	if (cardCompositeFilter != null) {
+    		cardFilter.set_cardCompositeFilter(cardCompositeFilter);
+    	}
+    	_viewModel.setCardFilter(cardFilter);
+    	_viewModel.onFilterChanged();
+		
+	}
+
+	public CardFilterCollection get_cardSearchCondition() {
+		return _viewModel.getCardFilter();
 	}
 
 }

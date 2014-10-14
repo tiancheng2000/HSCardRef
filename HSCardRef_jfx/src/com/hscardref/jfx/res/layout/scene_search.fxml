@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import com.thinkalike.jfx.control.*?>
+
+<AnchorPane id="p_search" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="364.0" prefWidth="473.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.hscardref.jfx.view.SearchScene">
+   <children>
+      <Label layoutX="35.0" layoutY="85.0" prefHeight="23.0" prefWidth="36.0" text="类别：" textFill="WHITE" />
+      <Label layoutX="35.0" layoutY="129.0" prefHeight="23.0" prefWidth="36.0" text="种族：" textFill="WHITE" />
+      <Label layoutX="35.0" layoutY="176.0" prefHeight="23.0" prefWidth="36.0" text="效果：" textFill="WHITE" />
+      <CheckBox fx:id="chk_minion" layoutX="82.0" layoutY="89.0" mnemonicParsing="false" text="随从" textFill="WHITE" />
+      <CheckBox fx:id="chk_spell" layoutX="142.0" layoutY="89.0" mnemonicParsing="false" text="法术" textFill="WHITE" />
+      <CheckBox fx:id="chk_weapon" layoutX="207.0" layoutY="89.0" mnemonicParsing="false" text="武器" textFill="WHITE" />
+      <CheckBox fx:id="chk_murloc" layoutX="82.0" layoutY="133.0" mnemonicParsing="false" text="鱼人" textFill="WHITE" />
+      <CheckBox fx:id="chk_demon" layoutX="142.0" layoutY="133.0" mnemonicParsing="false" text="恶魔" textFill="WHITE" />
+      <CheckBox fx:id="chk_beast" layoutX="207.0" layoutY="133.0" mnemonicParsing="false" text="野兽" textFill="WHITE" />
+      <CheckBox fx:id="chk_dragon" layoutX="282.0" layoutY="133.0" mnemonicParsing="false" text="龙" textFill="WHITE" />
+      <CheckBox fx:id="chk_pirate" layoutX="341.0" layoutY="133.0" mnemonicParsing="false" text="海盗" textFill="WHITE" />
+      <CheckBox fx:id="chk_divineShield" layoutX="343.0" layoutY="180.0" mnemonicParsing="false" text="圣盾" textFill="WHITE" />
+      <CheckBox fx:id="chk_deathRattle" layoutX="284.0" layoutY="180.0" mnemonicParsing="false" text="亡语" textFill="WHITE" />
+      <CheckBox fx:id="chk_combo" layoutX="209.0" layoutY="180.0" mnemonicParsing="false" text="连击" textFill="WHITE" />
+      <CheckBox fx:id="chk_charge" layoutX="144.0" layoutY="180.0" mnemonicParsing="false" text="冲锋" textFill="WHITE" />
+      <CheckBox fx:id="chk_battlecry" layoutX="84.0" layoutY="180.0" mnemonicParsing="false" text="战吼" textFill="WHITE" />
+      <CheckBox fx:id="chk_overload" layoutX="84.0" layoutY="210.0" mnemonicParsing="false" text="过载" textFill="WHITE" />
+      <CheckBox fx:id="chk_secret" layoutX="144.0" layoutY="210.0" mnemonicParsing="false" text="奥秘" textFill="WHITE" />
+      <CheckBox fx:id="chk_silence" layoutX="209.0" layoutY="210.0" mnemonicParsing="false" text="沉默" textFill="WHITE" />
+      <CheckBox fx:id="chk_stealth" layoutX="284.0" layoutY="210.0" mnemonicParsing="false" text="潜行" textFill="WHITE" />
+      <CheckBox fx:id="chk_taunt" layoutX="343.0" layoutY="210.0" mnemonicParsing="false" text="嘲讽" textFill="WHITE" />
+      <CheckBox fx:id="chk_spellDamage" layoutX="284.0" layoutY="239.0" mnemonicParsing="false" text="法术伤害" textFill="WHITE" />
+      <CheckBox fx:id="chk_enrage" layoutX="209.0" layoutY="239.0" mnemonicParsing="false" text="激怒" textFill="WHITE" />
+      <CheckBox fx:id="chk_choice" layoutX="144.0" layoutY="239.0" mnemonicParsing="false" text="抉择" textFill="WHITE" />
+      <CheckBox fx:id="chk_windfury" layoutX="84.0" layoutY="239.0" mnemonicParsing="false" text="风怒" textFill="WHITE" />
+      <Button fx:id="btn_search" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="33.0" layoutY="282.0" text="搜索" />
+      <Button fx:id="btn_clear" alignment="CENTER" contentDisplay="CENTER" layoutX="254.0" layoutY="282.0" mnemonicParsing="false" text="清空" />
+   </children>
+  <stylesheets>
+    <URL value="@../style_search.css" />
+  </stylesheets>
+</AnchorPane>

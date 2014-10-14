@@ -17,12 +17,16 @@
 package com.hscardref.jfx.view;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -40,8 +44,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
-
 import com.hscardref.generic.common.Constant;
+import com.hscardref.generic.domain.CardFilterCollection;
+import com.hscardref.generic.domain.CardNumericFilter;
 import com.hscardref.generic.viewmodel.NodeSelectorViewModel;
 import com.hscardref.generic.viewmodel.WorkareaViewModel;
 import com.hscardref.jfx.res.Res;
@@ -55,7 +60,7 @@ import com.thinkalike.generic.viewmodel.control.UIImageNode;
 import com.thinkalike.generic.viewmodel.control.UINode;
 import com.thinkalike.jfx.control.ImageNodeView;
 
-public class MainScene extends AnchorPane implements Initializable {
+public class MainScene extends AnchorPane implements Initializable, EventHandler<ActionEvent> {
 
 	//-- Constants and Enums --------------------------
 	public static final String TAG = MainScene.class.getSimpleName();
@@ -88,6 +93,9 @@ public class MainScene extends AnchorPane implements Initializable {
 		"btn_typeK.png",
 	};
 
+	private ArrayList<Button> NumFilterIds; 
+	private final static String[] NumFilterOffIcons = new String[]{"btn_nodefilter_all", "btn_nodefilter_0", "btn_nodefilter_1", "btn_nodefilter_2", "btn_nodefilter_3", "btn_nodefilter_4", "btn_nodefilter_5", "btn_nodefilter_6", "btn_nodefilter_7"}; 
+	private final static String[] NumFilterOnIcons = new String[]{"btn_nodefilter_all_on", "btn_nodefilter_0_on", "btn_nodefilter_1_on", "btn_nodefilter_2_on", "btn_nodefilter_3_on", "btn_nodefilter_4_on", "btn_nodefilter_5_on", "btn_nodefilter_6_on", "btn_nodefilter_7_on"};
 	//-- Inner Classes and Structures --------------------------
 	//kw: must use static inner class, otherwise every instance of the class will be accompanied with an instance of the enclosing class...  
 	private static class NodeTypeCell extends ListCell<NodeType> {
@@ -205,6 +213,8 @@ public class MainScene extends AnchorPane implements Initializable {
 	private WorkareaViewModel _vm_workarea = null;
 	private PropertyChangeListener _listenToVM_workarea = null; 
 
+	private SearchScene _searchScene = null;
+
 	//Sample of another kind of data-binding (by using JavaFX's ObservableList)
 	//private ItemListViewModel _vm_itemList = new ItemListViewModel();
     //private ItemDetailViewModel _vm_itemDetail = new ItemDetailViewModel();
@@ -299,6 +309,7 @@ public class MainScene extends AnchorPane implements Initializable {
 			};
 			_vm_nodeSelector.addPropertyChangeListener(Constant.PropertyName.NodeList, _listenToVM_nodeSelector);
 		}
+
 		_vm_nodeSelector.onRefreshNodeList();
 		
 		if(_vm_workarea == null){
@@ -319,6 +330,42 @@ public class MainScene extends AnchorPane implements Initializable {
 		//2.node type selector
 		this.cb_nodeType.setValue(_vm_nodeSelector.getCurrentNodeType()); //will activate PropertyChanged event
 		
+		// NumFilterIds object initalize
+		NumFilterIds = new ArrayList<>();
+		
+		btn_nodefilter_type.getStyleClass().add("btn_nodefilter_type");
+		
+		// Filter_all, Filter_0-7, Filter_custom
+		this.btn_nodefilter_all.getStyleClass().add("btn_nodefilter_all");
+		this.btn_nodefilter_all.addEventHandler(ActionEvent.ACTION, this);
+		NumFilterIds.add(this.btn_nodefilter_all);
+		this.btn_nodefilter_0.getStyleClass().add("btn_nodefilter_0");
+		this.btn_nodefilter_0.addEventHandler(ActionEvent.ACTION, this);
+		NumFilterIds.add(this.btn_nodefilter_0);
+		this.btn_nodefilter_1.getStyleClass().add("btn_nodefilter_1");
+		this.btn_nodefilter_1.addEventHandler(ActionEvent.ACTION, this);
+		NumFilterIds.add(this.btn_nodefilter_1);
+		this.btn_nodefilter_2.getStyleClass().add("btn_nodefilter_2");
+		this.btn_nodefilter_2.addEventHandler(ActionEvent.ACTION, this);
+		NumFilterIds.add(this.btn_nodefilter_2);
+		this.btn_nodefilter_3.getStyleClass().add("btn_nodefilter_3");
+		this.btn_nodefilter_3.addEventHandler(ActionEvent.ACTION, this);
+		NumFilterIds.add(this.btn_nodefilter_3);
+		this.btn_nodefilter_4.getStyleClass().add("btn_nodefilter_4");
+		this.btn_nodefilter_4.addEventHandler(ActionEvent.ACTION, this);
+		NumFilterIds.add(this.btn_nodefilter_4);
+		this.btn_nodefilter_5.getStyleClass().add("btn_nodefilter_5");
+		this.btn_nodefilter_5.addEventHandler(ActionEvent.ACTION, this);
+		NumFilterIds.add(this.btn_nodefilter_5);
+		this.btn_nodefilter_6.getStyleClass().add("btn_nodefilter_6");
+		this.btn_nodefilter_6.addEventHandler(ActionEvent.ACTION, this);
+		NumFilterIds.add(this.btn_nodefilter_6);
+		this.btn_nodefilter_7.getStyleClass().add("btn_nodefilter_7");
+		this.btn_nodefilter_7.addEventHandler(ActionEvent.ACTION, this);
+		NumFilterIds.add(this.btn_nodefilter_7);
+		this.btn_nodefilter_custom.getStyleClass().add("btn_nodefilter_custom");
+		this.btn_nodefilter_custom.addEventHandler(ActionEvent.ACTION, this);
+
 		//3.UINode --> ListCell 
 		//ImageNodeView + TextNodeView, ref:KT:\Study\Java\JavaFX\GUI\ListView\#readme.rtf
 //    	this.txt_nodeContent.setText(new_val.getProperty("content").toString());
@@ -331,6 +378,7 @@ public class MainScene extends AnchorPane implements Initializable {
 	//-- Public and internal Methods --------------------------
     //-- Private and Protected Methods --------------------------
 	//-- Event Handlers --------------------------
+	//--- IProperty Changed Event ---
 	private void updateNodeList(List<UINode> uiNodeList){
 		//IMPROVE: consider using JavaFX::ObservableArrayList or merely PropertyChangeListener for data-binding(UI Update)
 		this.lv_nodeList.setItems(FXCollections.observableArrayList(uiNodeList));
@@ -360,4 +408,78 @@ public class MainScene extends AnchorPane implements Initializable {
 			return;
 		}
 	}
+	
+	//--- EventHandler<ActionEvent> ---
+    @Override
+    public void handle(ActionEvent actionEvent) {
+    	
+    	CardFilterCollection cardFilter = _vm_nodeSelector.getCardFilter();
+    	CardNumericFilter cardNumFilter = cardFilter.get_cardNumericFilter();
+    	cardNumFilter.setType(Constant.FilterType.CRYSTAL);
+
+    	if (actionEvent.getSource() == btn_nodefilter_custom) {
+        	_searchScene.show();
+    	} else {
+        	for (int i = 0; i < NumFilterIds.size(); i++) {
+        		
+        		ObservableList<String> ol = NumFilterIds.get(i).getStyleClass();
+        		if (ol.contains(NumFilterOffIcons[i])) {
+        			ol.remove(NumFilterOffIcons[i]);
+        		}
+        		if (ol.contains(NumFilterOnIcons[i])) {
+        			ol.remove(NumFilterOnIcons[i]);
+        		}
+
+        		if (actionEvent.getSource() == NumFilterIds.get(i)) {
+            		cardNumFilter.setNum(i - 1);
+            		cardFilter.set_cardNumericFilter(cardNumFilter);
+            		_vm_nodeSelector.setCardFilter(cardFilter);
+                	_vm_nodeSelector.onFilterChanged();
+                	ol.add(NumFilterOnIcons[i]);
+        		} else {
+                	ol.add(NumFilterOffIcons[i]);
+        		}
+    		}    		
+    	}
+    }
+
+	/**
+	 * @return the _searchScene
+	 */
+	public SearchScene get_searchScene() {
+		return _searchScene;
+	}
+
+	/**
+	 * @param _searchScene the _searchScene to set
+	 */
+	public void set_searchScene(SearchScene _searchScene) {
+		this._searchScene = _searchScene;
+	}
+	
+	/**
+	 * search card with card attribute info
+	 */
+	public void searchCard() {
+    	CardFilterCollection cardFilter = _vm_nodeSelector.getCardFilter();
+    	cardFilter.set_cardCompositeFilter(_searchScene.getCardCompositeFilter());
+    	_vm_nodeSelector.setCardFilter(cardFilter);
+    	_vm_nodeSelector.onFilterChanged();
+    	
+		ObservableList<String> ol = btn_nodefilter_custom.getStyleClass();
+		if (ol.contains("btn_nodefilter_custom")) {
+			ol.remove("btn_nodefilter_custom");
+		}
+		if (ol.contains("btn_nodefilter_custom_on")) {
+			ol.remove("btn_nodefilter_custom_on");
+		}
+    	if (cardFilter.get_cardCompositeFilter().getAbilities().size() > 0 
+    			|| cardFilter.get_cardCompositeFilter().getRaces().size() > 0
+    			|| cardFilter.get_cardCompositeFilter().getTypes().size() > 0) {
+    		ol.add("btn_nodefilter_custom_on");
+    	} else {
+    		ol.add("btn_nodefilter_custom");
+    	}
+	}
+	
 }
