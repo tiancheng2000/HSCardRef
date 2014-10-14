@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">HearthStone Card Reference (cross-platform based on ThinkAlike)</string>
+    <string name="app_name">HearthStone Card Reference</string>
     <string name="title_nodeselector">Node Selector</string>
     <string name="title_workarea">WorkArea</string>
+    <string name="title_search">Search</string>
     <string name="thumb_node">Node Thumb (image)</string>
     <string name="progressbar">progress bar</string>
     <string name="loading">Loading&#8230;</string>
@@ -11,5 +12,33 @@
     <string name="btn_OK">OK</string>
     <string name="btn_Cancel">Cancel</string>
     <string name="btn_search">Search</string>
+    <string name="lab_type">Type:</string>
+    <string name="lab_race">Species:</string>
+    <string name="lab_ability">Effects:</string>
+    <string name="chk_minion">Minion</string>
+    <string name="chk_spell">Spell</string>
+    <string name="chk_weapon">Weapon</string>
+    <string name="chk_murloc">Murlocs</string>
+    <string name="chk_demon">Demons</string>
+    <string name="chk_beast">Beasts</string>
+    <string name="chk_dragon">Dragons</string>
+    <string name="chk_pirate">Pirates</string>
+    <string name="chk_totems">Totems</string>
+    <string name="chk_divineShield">Divine Shield</string>
+    <string name="chk_deathRattle">Death Rattle</string>
+    <string name="chk_combo">Combo</string>
+    <string name="chk_charge">Charge</string>
+    <string name="chk_battlecry">Battlecry</string>
+    <string name="chk_overload">Overload</string>
+    <string name="chk_secret">Secret</string>
+    <string name="chk_silence">Silence</string>
+    <string name="chk_stealth">Stealth</string>
+    <string name="chk_taunt">Taunt</string>
+    <string name="chk_spellDamage">Spell Damage</string>
+    <string name="chk_enrage">Enrage</string>
+    <string name="chk_choice">Choice</string>
+    <string name="chk_windfury">Windfury</string>
+    <string name="btn_search_sub">Search</string>
+    <string name="btn_clear">Clear</string>
     
 </resources>

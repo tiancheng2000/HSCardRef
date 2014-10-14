@@ -56,6 +56,11 @@ public class Constant extends com.thinkalike.jfx.common.Constant {
     	public static final int TEXT_FONTSIZE = 20;  //px
     }
 
+    public class SearchWindow{
+    	public static final int WIDTH = 450;  //px
+    	public static final int HEIGHT = 350;  //px
+    }
+
     //--- Log related -------------------------------------
     //Log Tags -- for more, reference to generic.common.LogTag.java  
 	

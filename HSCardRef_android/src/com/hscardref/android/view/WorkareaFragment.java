@@ -16,18 +16,24 @@
 
 package com.hscardref.android.view;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
+import android.widget.Spinner;
 
-import com.hscardref.generic.viewmodel.WorkareaViewModel;
 import com.hscardref.R;
-import com.thinkalike.android.control.ImageNodeView;
+import com.hscardref.android.adapter.CardFilterTypeAdapter;
 import com.hscardref.generic.common.Constant;
+import com.hscardref.generic.viewmodel.WorkareaViewModel;
+import com.thinkalike.android.control.ImageNodeView;
 import com.thinkalike.generic.common.LogTag;
 import com.thinkalike.generic.common.Util;
 import com.thinkalike.generic.event.PropertyChangeEvent;
@@ -40,11 +46,14 @@ import com.thinkalike.generic.viewmodel.control.UINode;
  * contained in a {@link ItemListActivity} in two-pane mode (on tablets) or a
  * {@link CanvasActivity} on handsets.
  */
-public class WorkareaFragment extends Fragment {
+public class WorkareaFragment extends Fragment implements OnClickListener{
 
 	//-- Constants and Enums --------------------------
 	public static final String TAG = WorkareaFragment.class.getSimpleName();
 	//public static final String ARG_ITEM_ID = "item_id";
+	private final static int[] NumFilterIds = new int[]{R.id.btn_nodefilter_all, R.id.btn_nodefilter_0, R.id.btn_nodefilter_1, R.id.btn_nodefilter_2, R.id.btn_nodefilter_3, R.id.btn_nodefilter_4, R.id.btn_nodefilter_5, R.id.btn_nodefilter_6, R.id.btn_nodefilter_7plus }; 
+	private final static int[] NumFilterOffIcons = new int[]{R.drawable.filter_cost_rank_all, R.drawable.filter_cost_rank_0, R.drawable.filter_cost_rank_1, R.drawable.filter_cost_rank_2, R.drawable.filter_cost_rank_3, R.drawable.filter_cost_rank_4, R.drawable.filter_cost_rank_5, R.drawable.filter_cost_rank_6, R.drawable.filter_cost_rank_7plus }; 
+	private final static int[] NumFilterOnIcons = new int[]{R.drawable.filter_cost_rank_all_on, R.drawable.filter_cost_rank_0_on, R.drawable.filter_cost_rank_1_on, R.drawable.filter_cost_rank_2_on, R.drawable.filter_cost_rank_3_on, R.drawable.filter_cost_rank_4_on, R.drawable.filter_cost_rank_5_on, R.drawable.filter_cost_rank_6_on, R.drawable.filter_cost_rank_7plus_on }; 
 	
 	//-- Inner Classes and Structures --------------------------
 	//-- Delegates and Events --------------------------	
@@ -54,9 +63,21 @@ public class WorkareaFragment extends Fragment {
 	//private ImageView _iv_content;
 	private ProgressDialog _pd;
 	private ImageNodeView _inv_nodecontent;
+	private Spinner _spinner;
 	private Button _btn_OK;
+	private Button _btn_nodefilter_0;
+	private Button _btn_nodefilter_1;
+	private Button _btn_nodefilter_2;
+	private Button _btn_nodefilter_3;
+	private Button _btn_nodefilter_4;
+	private Button _btn_nodefilter_5;
+	private Button _btn_nodefilter_6;
+	private Button _btn_nodefilter_7plus;
+	private Button _btn_nodefilter_all;
+	private Button _btn_nodefilter_custom;
 	
 	// FragmentCallbacks
+	private FragmentCallbacks _listenerFromActivity;
 
 	// MVVM
 	private WorkareaViewModel _viewModel = null;
@@ -150,6 +171,49 @@ public class WorkareaFragment extends Fragment {
 //			});
 //		}
 
+		// Spinner init
+		int[] images = {R.drawable.attr_cost, R.drawable.attr_hp, R.drawable.attr_atk};
+		int[] values = {Constant.FilterType.CRYSTAL, Constant.FilterType.HP, Constant.FilterType.ATTACK};
+		_spinner = (Spinner)rootView.findViewById(R.id.btn_nodefilter_type);
+		CardFilterTypeAdapter adapter = new CardFilterTypeAdapter(getActivity(), images, values);
+		_spinner.setAdapter(adapter);
+		_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+			
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				_listenerFromActivity.onAction(_spinner.getId(), arg2);
+			}
+		});
+
+		// button event register
+		_btn_nodefilter_0 = (Button) rootView.findViewById(R.id.btn_nodefilter_0); 
+		_btn_nodefilter_0.setOnClickListener(this);
+		_btn_nodefilter_1 = (Button) rootView.findViewById(R.id.btn_nodefilter_1); 
+		_btn_nodefilter_1.setOnClickListener(this);
+		_btn_nodefilter_2 = (Button) rootView.findViewById(R.id.btn_nodefilter_2); 
+		_btn_nodefilter_2.setOnClickListener(this);
+		_btn_nodefilter_3 = (Button) rootView.findViewById(R.id.btn_nodefilter_3); 
+		_btn_nodefilter_3.setOnClickListener(this);
+		_btn_nodefilter_4 = (Button) rootView.findViewById(R.id.btn_nodefilter_4); 
+		_btn_nodefilter_4.setOnClickListener(this);
+		_btn_nodefilter_5 = (Button) rootView.findViewById(R.id.btn_nodefilter_5); 
+		_btn_nodefilter_5.setOnClickListener(this);
+		_btn_nodefilter_6 = (Button) rootView.findViewById(R.id.btn_nodefilter_6); 
+		_btn_nodefilter_6.setOnClickListener(this);
+		_btn_nodefilter_7plus = (Button) rootView.findViewById(R.id.btn_nodefilter_7plus); 
+		_btn_nodefilter_7plus.setOnClickListener(this);
+		_btn_nodefilter_all = (Button) rootView.findViewById(R.id.btn_nodefilter_all); 
+		_btn_nodefilter_all.setOnClickListener(this);
+		_btn_nodefilter_custom = (Button) rootView.findViewById(R.id.btn_nodefilter_custom); 
+		_btn_nodefilter_custom.setOnClickListener(this);
+		
 		return rootView;
 	}
 
@@ -162,6 +226,28 @@ public class WorkareaFragment extends Fragment {
 		//_viewModel.onXxx();
 	}
 	
+	@Override
+	public void onAttach(Activity activity) {
+		Util.trace(LogTag.LifeCycleManagement, String.format("%s: onAttach", getClass().getSimpleName()));
+		super.onAttach(activity);
+
+		//ViewModel may check type of parent Activity here. 
+		if (!(activity instanceof FragmentCallbacks)) {
+			throw new IllegalStateException(
+					"Activity must implement fragment's callbacks.");
+		}
+
+		_listenerFromActivity = (FragmentCallbacks) activity;
+	}
+
+	@Override
+	public void onDetach() {
+		Util.trace(LogTag.LifeCycleManagement, String.format("%s: onDetach", getClass().getSimpleName()));
+		super.onDetach();
+
+		// Reset the active callbacks interface to null.
+		_listenerFromActivity = null;
+	}
 	
 	@Override
 	public void onDestroy() {
@@ -212,6 +298,44 @@ public class WorkareaFragment extends Fragment {
 	}
 	
 	//-- Event Handlers --------------------------
+	@Override
+	public void onClick(View arg0) {
 
+		// clicked button is numeric button?
+		int idxNumFilterClicked = -1;
+		for (int i = 0; i < NumFilterIds.length; i++) {
+			if (arg0.getId() == NumFilterIds[i]) {
+				idxNumFilterClicked = i;
+				break;
+			}
+		}
+		
+		//IMPROVE: encapsulate a 2-state image button class
+		// numeric button status update
+		if (idxNumFilterClicked >= 0) {
+			_btn_nodefilter_all.setBackgroundResource(NumFilterOffIcons[0]);
+			_btn_nodefilter_0.setBackgroundResource(NumFilterOffIcons[1]);
+			_btn_nodefilter_1.setBackgroundResource(NumFilterOffIcons[2]);
+			_btn_nodefilter_2.setBackgroundResource(NumFilterOffIcons[3]);
+			_btn_nodefilter_3.setBackgroundResource(NumFilterOffIcons[4]);
+			_btn_nodefilter_4.setBackgroundResource(NumFilterOffIcons[5]);
+			_btn_nodefilter_5.setBackgroundResource(NumFilterOffIcons[6]);
+			_btn_nodefilter_6.setBackgroundResource(NumFilterOffIcons[7]);
+			_btn_nodefilter_7plus.setBackgroundResource(NumFilterOffIcons[8]);
+			arg0.setBackgroundResource(NumFilterOnIcons[idxNumFilterClicked]);
+		}
+		
+		//IMPROVE: avoid using numeric across different classes (esp. different domains) to avoid unnecessary coupling. 
+		Integer type = (Integer)_spinner.getSelectedItem();
+		_listenerFromActivity.onAction(arg0.getId(), type.intValue());
+	}
+
+	public void setFilterDialogStatus(boolean isBkgDark) {
+		if (isBkgDark) {
+			_btn_nodefilter_custom.setBackgroundResource(R.drawable.btn_gold);
+		} else {
+			_btn_nodefilter_custom.setBackgroundResource(R.drawable.btn_gold_on);
+		}
+	}
 }
 
