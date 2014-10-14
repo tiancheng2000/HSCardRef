@@ -11,32 +11,5 @@
     <string name="btn_OK">确认</string>
     <string name="btn_Cancel">取消</string>
     <string name="btn_search">全库查找</string>
-    <string name="lab_type">类别：</string>
-    <string name="lab_race">种族：</string>
-    <string name="lab_ability">效果：</string>
-    <string name="chk_minion">随从</string>
-    <string name="chk_spell">法术</string>
-    <string name="chk_weapon">武器</string>
-    <string name="chk_murloc">鱼人</string>
-    <string name="chk_demon">恶魔</string>
-    <string name="chk_beast">野兽</string>
-    <string name="chk_dragon">龙　</string>
-    <string name="chk_pirate">海盗</string>
-    <string name="chk_divineShield">圣盾</string>
-    <string name="chk_deathRattle">亡语</string>
-    <string name="chk_combo">连击</string>
-    <string name="chk_charge">冲锋</string>
-    <string name="chk_battlecry">战吼</string>
-    <string name="chk_overload">过载</string>
-    <string name="chk_secret">奥秘</string>
-    <string name="chk_silence">沉默</string>
-    <string name="chk_stealth">潜行</string>
-    <string name="chk_taunt">嘲讽</string>
-    <string name="chk_spellDamage">法术伤害</string>
-    <string name="chk_enrage">激怒</string>
-    <string name="chk_choice">抉择</string>
-    <string name="chk_windfury">风怒</string>
-    <string name="btn_search_sub">搜索</string>
-    <string name="btn_clear">清空</string>
-
+    
 </resources>

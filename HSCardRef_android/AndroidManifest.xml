@@ -26,15 +26,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.hscardref.android.view.SearchActivity"
-            android:label="@string/title_search" 
-            android:theme="@style/Theme.FilterDialog"
-            android:screenOrientation="landscape">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".android.view.MainActivity" />
-        </activity>
-        <activity
             android:name="com.hscardref.android.view.WorkareaActivitykareaActivity"
             android:label="@string/title_workarea" 
             android:screenOrientation="landscape" >

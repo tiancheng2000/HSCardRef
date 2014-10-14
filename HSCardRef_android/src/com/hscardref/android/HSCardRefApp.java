@@ -23,7 +23,6 @@ import android.os.Environment;
 import com.thinkalike.android.common.Util;
 import com.thinkalike.generic.Loader;
 import com.thinkalike.generic.Platform;
-import com.thinkalike.generic.common.LogTag;
 import com.thinkalike.generic.common.Config.Key;
 import com.thinkalike.generic.domain.Factory;
 import com.hscardref.generic.common.Config;
@@ -67,8 +66,6 @@ public class HSCardRefApp extends android.app.Application implements Platform, L
 		@SuppressWarnings("unused")
 		Util dumb = Util.getInstance(); //initialize
 		Util.trace(null, TAG, "---------- " +Constant.APP_SHORTNAME+ " get launched [" +com.thinkalike.generic.common.Util.getTimeStamp()+ "] ----------");
-		Util.trace(getClass().getSimpleName(), "LogTag mode:"+LogTag.getShowMode().toString()+", "
-				+ ((LogTag.getShowMode()==LogTag.ShowMode.Exclusion) ? "Excluded:"+LogTag.listExclusionItems() : "Included:"+LogTag.listInclusionItems()));
 		Util.trace(null, TAG, String.format("resolution = %s", getResources().getDisplayMetrics().toString()));
 		//Util.trace(null, TAG, String.format("resolution=%d*%d, density=%d", System.getProperty("")));
 		ActivityManager am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);

@@ -31,7 +31,7 @@
             <TilePane fx:id="tp_work" />
             <VBox fx:id="vb_work" fillWidth="false" alignment="TOP_CENTER">
               <children>
-                <Label fx:id="lb_nodeContent" text="">
+                <Label fx:id="lb_nodeContent" text="Work Area">
 	              <VBox.margin>
 	                <Insets bottom="0.0" left="0.0" right="0.0" top="70.0" />
 	              </VBox.margin>

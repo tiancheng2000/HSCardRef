@@ -20,26 +20,22 @@ import java.io.InputStream;
 import java.util.Locale;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import com.hscardref.generic.common.Config;
 import com.hscardref.generic.common.Constant;
 import com.hscardref.jfx.res.Res;
 import com.hscardref.jfx.view.MainScene;
-import com.hscardref.jfx.view.SearchScene;
 import com.thinkalike.generic.Loader;
 import com.thinkalike.generic.Platform;
 import com.thinkalike.generic.common.Config.Key;
-import com.thinkalike.generic.common.LogTag;
 import com.thinkalike.generic.common.Util;
+import com.thinkalike.generic.dal.AssetManager;
 import com.thinkalike.generic.domain.Factory;
 
 public class HSCardRefApp extends Application implements Platform, Loader.OnLoaderEventListener {
@@ -83,8 +79,6 @@ public class HSCardRefApp extends Application implements Platform, Loader.OnLoad
 		//IMPROVE: retrieve system display metrics for JRE platform
 		//Util.trace(getClass().getSimpleName(), String.format("resolution = %s", getResources().getDisplayMetrics().toString()));
 		//Util.trace(getClass().getSimpleName(), String.format("resolution=%d*%d, density=%d", System.getProperty("")));
-		Util.trace(getClass().getSimpleName(), "LogTag mode:"+LogTag.getShowMode().toString()+", "
-						+ ((LogTag.getShowMode()==LogTag.ShowMode.Exclusion) ? "Excluded:"+LogTag.listExclusionItems() : "Included:"+LogTag.listInclusionItems()));
 		
 		//3.Initialize other platform-dependent elements 
 		//Config.PATH_PHOTORESOURCE = "";
@@ -201,51 +195,10 @@ public class HSCardRefApp extends Application implements Platform, Loader.OnLoad
         return (Initializable) loader.getController();
     }
 	
-	private Initializable createSubSceneContent(String layout_fxml) throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-        InputStream is_layout = getClass().getClassLoader().getResourceAsStream(layout_fxml);
-        loader.setBuilderFactory(new JavaFXBuilderFactory());
-        loader.setLocation(getClass().getClassLoader().getResource(layout_fxml));
-        Parent root;
-        try {
-        	root = (Parent)loader.load(is_layout);
-        } finally {
-            is_layout.close();
-        }
-        Scene subScene = new Scene(root, com.hscardref.jfx.common.Constant.SearchWindow.WIDTH, com.hscardref.jfx.common.Constant.SearchWindow.HEIGHT);
-        //NOTE: JavaFX bug fix. Otherwise Popup window will not inherit global style setting, though it also belongs to the Scene. ref:http://stackoverflow.com/questions/17551774/javafx-styling-pop-up-windows
-        subScene.getStylesheets().addAll(root.getStylesheets());
-        Stage subStage = new Stage();
-        subStage.setScene(subScene);
-        subStage.sizeToScene();
-        subStage.initModality(Modality.APPLICATION_MODAL);
-        subStage.initOwner(_primaryStage);
-        subStage.hide();
-        Initializable controller = (Initializable) loader.getController();
-        //IMPROVE: find more substantial method to link Controller (or root Node) with Stage 
-        if(controller instanceof SearchScene)
-        	((SearchScene)controller).set_stage(subStage);
-        final SearchScene searchScene = (SearchScene)controller;
-        subStage.setOnHidden(new EventHandler<WindowEvent>() {
-			
-			@Override
-			public void handle(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-				searchScene.onFilterApply();
-			}
-		});
-        return controller;
-    }
-
     private void gotoMainScene() {
         try {
-        	//TODO: 1.correct the concepts of Scene and Controller 2.avoid redundant "relationship building" code 
         	@SuppressWarnings("unused")
 			MainScene mainScene = (MainScene) replacePrimarySceneContent(Res.getLayoutUrl("scene_main.fxml"));
-        	SearchScene searchScene = (SearchScene) createSubSceneContent(Res.getLayoutUrl("scene_search.fxml"));
-        	mainScene.set_searchScene(searchScene);
-        	searchScene.setParentScene(mainScene);
         } catch (Exception ex) {
         	//use Util from generic package
             //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

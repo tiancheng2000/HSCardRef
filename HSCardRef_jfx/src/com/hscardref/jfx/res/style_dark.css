@@ -46,36 +46,18 @@
     -fx-text-fill: #aaaaaa;
 }
 
-.btn_nodefilter_type {-fx-graphic: url("images/filter_type_cost.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_all {-fx-graphic: url("images/filter_cost_rank_all.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_0 {-fx-graphic: url("images/filter_cost_rank_0.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_1 {-fx-graphic: url("images/filter_cost_rank_1.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_2 {-fx-graphic: url("images/filter_cost_rank_2.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_3 {-fx-graphic: url("images/filter_cost_rank_3.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_4 {-fx-graphic: url("images/filter_cost_rank_4.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_5 {-fx-graphic: url("images/filter_cost_rank_5.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_6 {-fx-graphic: url("images/filter_cost_rank_6.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_7 {-fx-graphic: url("images/filter_cost_rank_7+.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_custom {
+#btn_nodefilter_type {-fx-graphic: url("images/filter_type_cost.png");-fx-background-color: rgba(0,0,0,0);}
+#btn_nodefilter_all {-fx-graphic: url("images/filter_cost_rank_all.png");-fx-background-color: rgba(0,0,0,0);}
+#btn_nodefilter_0 {-fx-graphic: url("images/filter_cost_rank_0.png");-fx-background-color: rgba(0,0,0,0);}
+#btn_nodefilter_1 {-fx-graphic: url("images/filter_cost_rank_1.png");-fx-background-color: rgba(0,0,0,0);}
+#btn_nodefilter_2 {-fx-graphic: url("images/filter_cost_rank_2.png");-fx-background-color: rgba(0,0,0,0);}
+#btn_nodefilter_3 {-fx-graphic: url("images/filter_cost_rank_3.png");-fx-background-color: rgba(0,0,0,0);}
+#btn_nodefilter_4 {-fx-graphic: url("images/filter_cost_rank_4.png");-fx-background-color: rgba(0,0,0,0);}
+#btn_nodefilter_5 {-fx-graphic: url("images/filter_cost_rank_5.png");-fx-background-color: rgba(0,0,0,0);}
+#btn_nodefilter_6 {-fx-graphic: url("images/filter_cost_rank_6.png");-fx-background-color: rgba(0,0,0,0);}
+#btn_nodefilter_7 {-fx-graphic: url("images/filter_cost_rank_7+.png");-fx-background-color: rgba(0,0,0,0);}
+#btn_nodefilter_custom {
 	-fx-graphic: url("images/btn_gold.png");
-	-fx-background-color: rgba(0,0,0,0);
-	/* -fx-font: bold 12 simsun; */
-	-fx-font: bold 20 arial;
-	-fx-text-fill: #555555;
-}
-
-.btn_nodefilter_type_on {-fx-graphic: url("images/filter_type_cost.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_all_on {-fx-graphic: url("images/filter_cost_rank_all_on.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_0_on {-fx-graphic: url("images/filter_cost_rank_0_on.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_1_on {-fx-graphic: url("images/filter_cost_rank_1_on.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_2_on {-fx-graphic: url("images/filter_cost_rank_2_on.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_3_on {-fx-graphic: url("images/filter_cost_rank_3_on.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_4_on {-fx-graphic: url("images/filter_cost_rank_4_on.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_5_on {-fx-graphic: url("images/filter_cost_rank_5_on.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_6_on {-fx-graphic: url("images/filter_cost_rank_6_on.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_7_on {-fx-graphic: url("images/filter_cost_rank_7plus_on.png");-fx-background-color: rgba(0,0,0,0);}
-.btn_nodefilter_custom_on {
-	-fx-graphic: url("images/btn_gold_on.png");
 	-fx-background-color: rgba(0,0,0,0);
 	/* -fx-font: bold 12 simsun; */
 	-fx-font: bold 20 arial;

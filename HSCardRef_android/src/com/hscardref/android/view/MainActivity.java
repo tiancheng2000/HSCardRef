@@ -19,17 +19,14 @@ package com.hscardref.android.view;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.hscardref.R;
 import com.hscardref.android.HSCardRefApp;
 import com.hscardref.generic.common.Constant;
-import com.hscardref.generic.domain.CardCompositeFilter;
-import com.hscardref.generic.domain.CardFilterCollection;
+import com.hscardref.R;
 import com.thinkalike.android.common.UncaughtExceptionHandler;
 import com.thinkalike.generic.common.LogTag;
 import com.thinkalike.generic.common.Util;
@@ -43,11 +40,10 @@ import com.thinkalike.generic.common.Util;
  * This activity also implements the required {@link NodeSelectorFragment.FragmentCallbacks}
  * interface to listen for resource drag&drop.
  */
-public class MainActivity extends FragmentActivity implements FragmentCallbacks {
+public class MainActivity extends FragmentActivity {
 
 	//-- Constants and Enums ----------------------------------------------
-	private static final int DIALOG_ONCLOSE = 99;
-	private static final int WIN_MODEL_REQUEST_CODE = 0x234;
+	private final static int DIALOG_ONCLOSE = 99;
 
 	//-- Inner Classes and Structures -------------------------------------
 	//-- Delegates and Events ---------------------------------------------
@@ -99,6 +95,13 @@ public class MainActivity extends FragmentActivity implements FragmentCallbacks 
 		super.onDestroy();
 	}
 
+	@SuppressWarnings("deprecation")
+	@Override
+	public void onBackPressed() {
+		this.showDialog(DIALOG_ONCLOSE); //for simplicity. IMPROVE: use DialogFragment instead
+		//super.onBackPressed();
+	}
+
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		Dialog dialog=null;
@@ -122,78 +125,8 @@ public class MainActivity extends FragmentActivity implements FragmentCallbacks 
 		return dialog;
 	}
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-
-		if (requestCode == WIN_MODEL_REQUEST_CODE) {
-			if (resultCode == RESULT_OK) {
-				Bundle mBundle = intent.getBundleExtra("CardCompositeFilter");
-				CardCompositeFilter cardCompositeFilter = (CardCompositeFilter) mBundle
-						.get("com.hscardref.generic.domain.CardCompositeFilter");
-				NodeSelectorFragment nodeSelectorFragment = (NodeSelectorFragment) getSupportFragmentManager()
-						.findFragmentById(R.id.nodeselector);
-
-				if (nodeSelectorFragment != null) {
-					nodeSelectorFragment.setRefresh(false);
-					// Call a method in the NodeSelectorFragment to search card
-					// info
-					nodeSelectorFragment.applyCardFilter(-2, 0, cardCompositeFilter);
-				}
-				
-				WorkareaFragment workareaFragment = (WorkareaFragment) getSupportFragmentManager()
-						.findFragmentById(R.id.workarea);
-		    	if (cardCompositeFilter.getAbilities().size() > 0 
-		    			|| cardCompositeFilter.getRaces().size() > 0
-		    			|| cardCompositeFilter.getTypes().size() > 0) {
-		    		workareaFragment.setFilterDialogStatus(false);
-		    	} else {
-		    		workareaFragment.setFilterDialogStatus(true);
-		    	}
-			}
-		}
-	}
-
 	//-- Public and internal Methods --------------------------------------
 	//-- Private and Protected Methods ------------------------------------
 	//-- Event Handlers ---------------------------------------------------
-	@SuppressWarnings("deprecation")
-	@Override
-	public void onBackPressed() {
-		this.showDialog(DIALOG_ONCLOSE); //for simplicity. IMPROVE: use DialogFragment instead
-		//super.onBackPressed();
-	}
-
-	//--- FragmentCallback ---
-	@Override
-	public void onAction(int id, int filterType) {
-
-		NodeSelectorFragment nodeSelectorFragment = (NodeSelectorFragment) getSupportFragmentManager()
-				.findFragmentById(R.id.nodeselector);
-
-		if (nodeSelectorFragment != null) {
-			if (R.id.btn_nodefilter_custom == id) {
-				//IMPROVE: use English comment for open source community~~
-				// 父Activitiy向子类Activity传递数据
-				Intent intent = new Intent(MainActivity.this,
-						SearchActivity.class);
-				CardFilterCollection cardFilter = nodeSelectorFragment.get_cardSearchCondition();
-				
-				// 设置数据信息
-	    		Bundle mBundle = new Bundle();
-	    		mBundle.putSerializable("com.hscardref.generic.domain.CardCompositeFilter", cardFilter == null ? null : cardFilter.get_cardCompositeFilter());
-		        // 设置在intent中存储 
-		        intent.putExtra("CardCompositeFilter", mBundle);  
-
-				// 备注此处启动方式为startActivityForResult(intent,请求编码)而不是startActivity(intent)
-				// 这是startActivityForResult和startActivity的重要区别，
-				// 1.是否传递请求编码
-				// 2.是否可以调用子类的方法
-				startActivityForResult(intent, WIN_MODEL_REQUEST_CODE);
-			} else {
-				// Call a method in the NodeSelectorFragment to search card info
-				nodeSelectorFragment.applyCardFilter(id, filterType, null);
-			}
-		}
-	}
 
 }
