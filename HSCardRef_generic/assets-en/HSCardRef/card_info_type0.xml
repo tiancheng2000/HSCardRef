@@ -858,15 +858,6 @@
 		<abilities>battlecry{}</abilities>
 	</card_info>
 	<card_info>
-		<id>Leeroy+Jenkins</id>
-		<rarity>4</rarity>
-		<type>M</type>
-		<cost>4</cost>
-		<atk>6</atk>
-		<hp>2</hp>
-		<abilities>charge,battlecry{}</abilities>
-	</card_info>
-	<card_info>
 		<id>Mogu'shan+Warden</id>
 		<rarity>1</rarity>
 		<type>M</type>
@@ -1065,6 +1056,15 @@
 		<atk>5</atk>
 		<hp>4</hp>
 		<abilities>battlecry{}</abilities>
+	</card_info>
+	<card_info>
+		<id>Leeroy+Jenkins</id>
+		<rarity>4</rarity>
+		<type>M</type>
+		<cost>5</cost>
+		<atk>6</atk>
+		<hp>2</hp>
+		<abilities>charge,battlecry{}</abilities>
 	</card_info>
 	<card_info>
 		<id>Nightblade</id>

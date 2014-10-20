@@ -87,16 +87,6 @@
 		<hp>2</hp>
 	</card_info>
 	<card_info>
-		<id>Starving+Buzzard</id>
-		<rarity>0</rarity>
-		<type>M</type>
-		<subtype>BE</subtype>
-		<cost>2</cost>
-		<atk>2</atk>
-		<hp>1</hp>
-		<abilities>card+=1(play.BE)</abilities>
-	</card_info>
-	<card_info>
 		<id>Unleash+the+Hounds</id>
 		<rarity>1</rarity>
 		<type>S</type>
@@ -161,6 +151,16 @@
 		<atk>2</atk>
 		<hp>5</hp>
 		<abilities>charge</abilities>
+	</card_info>
+	<card_info>
+		<id>Starving+Buzzard</id>
+		<rarity>0</rarity>
+		<type>M</type>
+		<subtype>BE</subtype>
+		<cost>5</cost>
+		<atk>3</atk>
+		<hp>2</hp>
+		<abilities>card+=1(play.BE)</abilities>
 	</card_info>
 	<card_info>
 		<id>Savannah+Highmane</id>
